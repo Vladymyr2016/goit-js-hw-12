@@ -1,0 +1,126 @@
+/**
+  |============================
+  | include css partials with
+  | default @import url()
+  |============================
+*/
+@import url('./reset.css');
+@import url('./1-gallery.css');
+@import url('./header.css');
+@import url('simplelightbox/dist/simple-lightbox.min.css');
+@import url('./loader.css');
+
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #242424;
+  background-color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+.feedback-form {
+  display: inline-flex;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+input {
+  display: flex;
+  width: 360px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+textarea {
+  display: flex;
+  width: 360px;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  resize: none;
+}
+
+button {
+  border-radius: 8px;
+  background: #4E75FF;
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.item {
+  width: 360px;
+  height: 250px;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 360px;
+  height: 200px;
+
+}
+
+.forminp {
+  margin: auto;
+}
+
+.feedback-form {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  margin-right: 10px;
+}
+
+.btn {
+  color: #FFF;
+
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  /* 150% */
+  letter-spacing: 0.64px;
+
+}
+
+.box-text {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.main-text {
+  font-size: 16px;
+  align-items: center;
+}
+
+.text {
+  font-size: 10px;
+  text-align: center;
+}
