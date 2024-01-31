@@ -68,11 +68,20 @@ async function onSubmit(e) {
   serchQuery = e.currentTarget.elements.search.value.trim();
   try {
     const arr = await fetchImage(serchQuery);
-
-    listEl.innerHTML = markUp(arr);
-    modal.refresh();
-    serchQuery = '';
-    loader.classList.add('is-hidden');
+    if (arr.length === 0) {
+      iziToast.error({
+        position: 'center',
+        title: 'Error',
+        message: 'Sorry, we don`t have saerch img!',
+      });
+      btnLoadMore.classList.add('is-hidden');
+    } else {
+      listEl.innerHTML = markUp(arr);
+      modal.refresh();
+      serchQuery = '';
+      loader.classList.add('is-hidden');
+      btnLoadMore.classList.remove('is-hidden');
+    }
   } catch (error) {
     iziToast.error({
       position: 'center',
@@ -81,7 +90,7 @@ async function onSubmit(e) {
         'Sorry, there are no images matching your search query. Please try again!',
     });
   }
-  btnLoadMore.classList.remove('is-hidden');
+
   formEl.reset();
 }
 
