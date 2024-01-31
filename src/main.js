@@ -7,26 +7,33 @@ import axios from 'axios';
 const formEl = document.querySelector('.feedback-form');
 const listEl = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
+const btnLoadMore = document.querySelector('.load-more');
+let serchQuery;
+let totalResults;
 const modal = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   captions: true,
   captionsData: 'alt',
   captionPosition: 'bottom',
 });
+let page = 1;
+let pageSize;
 async function fetchImage(q) {
   const API_KEY = '42040031-47a3b216d4f97a43df3da958a';
-  const PARAMS = new URLSearchParams({
+  const params = {
     key: API_KEY,
     q,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
-  });
+    page: page,
+    pageSize: 40,
+  };
   const BASE_URL = 'https://pixabay.com/api';
-  const url = `${BASE_URL}/?${PARAMS}`;
+  const url = `${BASE_URL}/`;
 
   try {
-    const respons = await axios.get(url, PARAMS);
+    const respons = await axios.get(url, { params });
 
     return respons.data.hits;
   } catch (error) {
@@ -35,20 +42,36 @@ async function fetchImage(q) {
 }
 
 formEl.addEventListener('submit', onSubmit);
+btnLoadMore.addEventListener('click', onLoadMoreClick);
+
+async function onLoadMoreClick() {
+  page += 1;
+  const arr = await fetchImage(serchQuery);
+  const markup = markUp(arr);
+  listEl.insertAdjacentHTML('beforeend', markup);
+
+  hideLoader();
+  changeBtnStatus();
+}
+
+function changeBtnStatus() {
+  const maxPage = Math.ceil(totalResults / pageSize);
+
+  btnLoadMore.disabled = page >= maxPage;
+}
 
 async function onSubmit(e) {
   e.preventDefault();
   loader.classList.remove('is-hidden');
   listEl.innerHTML = '';
-  const serchQuery = e.currentTarget.elements.search.value.trim();
+  page = 1;
+  serchQuery = e.currentTarget.elements.search.value.trim();
   try {
     const arr = await fetchImage(serchQuery);
-    console.log(arr);
-    // if (arr.length !== 0) {
+
     listEl.innerHTML = markUp(arr);
     modal.refresh();
     loader.classList.add('is-hidden');
-    // }
   } catch (error) {
     iziToast.error({
       position: 'center',
@@ -87,4 +110,11 @@ function markUp(arr) {
       }
     )
     .join('');
+}
+
+function showLoader() {
+  btnLoadMore.classList.remove('is-hidden');
+}
+function hideLoader() {
+  btnLoadMore.classList.add('is-hidden');
 }
