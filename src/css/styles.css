@@ -124,3 +124,18 @@ button {
   font-size: 10px;
   text-align: center;
 }
+
+.load-more {
+  display: block;
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: blue;
+
+  display: flex;
+  align-items: center;
+  margin: auto;
+
+}
